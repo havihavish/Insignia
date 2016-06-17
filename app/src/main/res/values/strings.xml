@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Insignia 2K16</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_locate_us">NIT DELHI</string>
+    <string name="title_activity_about__insignia">About_Insignia</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+</resources>
