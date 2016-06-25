@@ -2,20 +2,25 @@ package com.example.android.insignia2k16;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +29,29 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        //recycler view
+        mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+
+        mRecyclerView.setLayoutManager(layoutManager);
+
+        MyAdapter myAdapter = new MyAdapter(this);
+
+        mRecyclerView.setAdapter(myAdapter);
+
+        myAdapter.SetOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onItemClick(View view, int position) {
+                Log.e("xxxxxx","cxxxxxxxxxxxxxx");
+                Toast.makeText(MainActivity.this, Constants.mEvents_names[position] + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this,DetailActivity.class);
+                intent.putExtra("p",position);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(MainActivity.this,
+                                findViewById(R.id.list_item_imageView), "image_trans");
+                startActivity(intent);
             }
         });
 
@@ -88,7 +110,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_instafeed) {
 
-            Intent intent = new Intent(MainActivity.this,Instafeed.class);
+            Intent intent = new Intent
+                    (MainActivity.this,Instafeed.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_Locate_us) {
@@ -113,4 +136,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

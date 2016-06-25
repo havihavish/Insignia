@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.android.insignia2k16.DetailActivity"
+    tools:showIn="@layout/activity_detail"
+    android:contextClickable="false">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@drawable/poster1"
+        android:transitionName="image_trans"
+        android:scaleType="centerCrop"
+        android:id="@+id/detail_imageView"/>
+
+    <ImageButton
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:id="@+id/detail_fab"
+        android:layout_marginRight="20dp"
+        android:elevation="1dp"
+        android:background="@drawable/fab_button"
+        android:layout_above="@+id/detail_textView"
+        android:layout_marginBottom="-32dp"
+        android:src="@drawable/tick"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="Dummy Text"
+        android:padding="16dp"
+        android:layout_below="@id/detail_imageView"
+        android:id="@+id/detail_textView"
+        android:textSize="24dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="#737070"
+        android:textColor="#ffffff"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/detail_textView"
+        android:orientation="horizontal"
+        android:id="@+id/detail_linear_layout"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_timer"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event Starts at.."
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:layout_marginLeft="20dp"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/detail_label"
+        android:layout_below="@id/detail_linear_layout"
+        android:src="@drawable/ic_label"
+        android:layout_marginLeft="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:layout_toRightOf="@id/detail_label"
+        android:layout_below="@id/detail_linear_layout"
+        android:id="@+id/detail_description_label"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:textSize="24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_below="@id/detail_description_label"
+        android:layout_toRightOf="@id/detail_label"
+        android:id="@+id/details_description_text"
+        android:text="@string/dummy_text"
+        android:layout_marginLeft="20dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Register"
+        android:textSize="18sp"
+        android:id="@+id/detail_register_button"
+        android:layout_below="@id/details_description_text"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:elevation="8dp"
+        android:layout_marginBottom="10dp"
+        android:background="#737070"
+        android:textColor="#ffffff"/>
+
+</RelativeLayout>
+</ScrollView>
