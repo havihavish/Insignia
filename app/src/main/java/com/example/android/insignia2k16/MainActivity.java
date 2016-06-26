@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra("p",position);
                 ActivityOptionsCompat options = ActivityOptionsCompat.
                         makeSceneTransitionAnimation(MainActivity.this,
-                                findViewById(R.id.list_item_imageView), "image_trans");
+                                findViewById(R.id.recycler_view), "animate");
                 startActivity(intent);
             }
         });

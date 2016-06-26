@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="280dp"
     android:layout_margin="8dp"
+    android:transitionName="animate"
     android:elevation="8dp">
 
     <LinearLayout
@@ -20,12 +21,14 @@
             android:id="@+id/list_item_imageView"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Event Details"
             android:textSize="18sp"
             android:padding="16dp"
-            android:id="@+id/list_item_textView"/>
+            android:background="#123456"
+            android:id="@+id/list_item_textView"
+            android:textColor="#ffc579"/>
 
     </LinearLayout>
 

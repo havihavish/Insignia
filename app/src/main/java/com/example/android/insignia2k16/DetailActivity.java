@@ -1,13 +1,20 @@
 package com.example.android.insignia2k16;
 
+import android.animation.Animator;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
@@ -16,6 +23,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView mTextView;
     ImageView mFab;
     Button mRegister_button;
+    LinearLayout mLinearLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +36,60 @@ public class DetailActivity extends AppCompatActivity {
         mFab = (ImageView) findViewById(R.id.detail_fab);
         mTextView = (TextView) findViewById(R.id.detail_textView);
         mRegister_button = (Button)findViewById(R.id.detail_register_button);
+        mRegister_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registration();
+            }
+        });
         int position = getIntent().getIntExtra("p",0);
         mImageView.setImageResource(Constants.mEvents_posters[position]);
         mTextView.setText(Constants.mEvents_names[position]);
         Bitmap bitmap = getReducedBitmap(position);
         chooseColor(bitmap);
-        animate();
-
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                circularReveal(mImageView);
+            }
+        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void registration(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Requirements")
+                .setMessage("Condition a" + "\n" + "Condition b");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(DetailActivity.this,Registration.class);
+                startActivity(intent);
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void circularReveal(View selectedView) {
+        View myView = selectedView;
+
+        // get the center for the clipping circle
+        int cx = myView.getRight() -30;
+        int cy = myView.getBottom() -60;
+
+        // get the final radius for the clipping circle
+        float finalRadius = (float) Math.hypot(cx, cy);
+
+        // create the animator for this view (the start radius is zero)
+        Animator anim =
+                null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            anim = ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius).setDuration(500);
+        }
+        anim.start();
+
+
     }
 
     private Bitmap getReducedBitmap(int albumArtResId) {
@@ -48,32 +102,17 @@ public class DetailActivity extends AppCompatActivity {
 
     private void chooseColor(Bitmap b) {
 
-        Palette pallete = Palette.from(b).generate();
+        Palette.generateAsync(b, new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(Palette palette) {
+                Palette.Swatch swatch = palette.getVibrantSwatch();
+                if (swatch!=null){
+                    mTextView.setBackgroundColor(swatch.getRgb());
+                    mTextView.setTextColor(swatch.getTitleTextColor());
+                    mRegister_button.setBackgroundColor(swatch.getRgb());
+                }
 
-        int defaultPanelColor = 0xFF808080;
-        mTextView.setBackgroundColor(pallete.getDarkVibrantColor(defaultPanelColor));
-        mRegister_button.setBackgroundColor(pallete.getDarkVibrantColor(defaultPanelColor));
+            }
+        });
     }
-
-    private void animate() {
-
-        mFab.setScaleX(0);
-        mFab.setScaleY(0);
-        mFab.animate().scaleX(1).scaleY(1).setDuration(700).start();
-//        Animator fabAnimate = AnimatorInflater.loadAnimator(this,R.animator.scale);
-//        fabAnimate.setTarget(mFab);
-//        AnimatorSet set = new AnimatorSet();
-//
-//        int start = mTextView.getTop();
-//        int end = mTextView.getBottom();
-//
-//        ObjectAnimator titleAnimate = ObjectAnimator.ofInt(mTextView,"bottom",start,end);
-//
-////        titleAnimate.setInterpolator(new AccelerateInterpolator());
-//        mTextView.setBottom(start);
-//        set.playSequentially(fabAnimate,titleAnimate);
-//        set.start();
-
-    }
-
 }
