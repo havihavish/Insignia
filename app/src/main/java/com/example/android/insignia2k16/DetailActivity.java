@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
@@ -23,7 +23,9 @@ public class DetailActivity extends AppCompatActivity {
     TextView mTextView;
     ImageView mFab;
     Button mRegister_button;
-    LinearLayout mLinearLayout;
+    RelativeLayout mLinearLayout;
+    boolean flag = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class DetailActivity extends AppCompatActivity {
         mFab = (ImageView) findViewById(R.id.detail_fab);
         mTextView = (TextView) findViewById(R.id.detail_textView);
         mRegister_button = (Button)findViewById(R.id.detail_register_button);
+        mLinearLayout = (RelativeLayout)findViewById(R.id.abc);
         mRegister_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                circularReveal(mImageView);
+                circularReveal(mLinearLayout);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -85,9 +88,38 @@ public class DetailActivity extends AppCompatActivity {
         Animator anim =
                 null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            anim = ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius).setDuration(500);
+            if (flag){
+                anim = ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius).setDuration(500);
+                mLinearLayout.setVisibility(View.VISIBLE);
+                anim.start();
+                flag = false;
+            }else {
+                anim = ViewAnimationUtils.createCircularReveal(myView, cx, cy, finalRadius, 0).setDuration(500);
+                anim.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mLinearLayout.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                anim.start();
+                flag = true;
+            }
         }
-        anim.start();
 
 
     }

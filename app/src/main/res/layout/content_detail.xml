@@ -22,8 +22,8 @@
         android:transitionName="image_trans"
         android:scaleType="centerCrop"
         android:id="@+id/detail_imageView"
-        android:layout_alignLeft="@+id/detail_label"
-        android:layout_alignStart="@+id/detail_label"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,12 +31,12 @@
         android:id="@+id/abc"
         android:visibility="gone"
         android:background="#123456"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true">
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button1"
+            android:text="ADD REMINDER"
 
             android:layout_gravity="center"
             android:layout_above="@+id/button2"
@@ -44,7 +44,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button2"
+            android:text="SHARE THIS EVENT"
             android:layout_gravity="center_horizontal"
             android:layout_above="@+id/button"
             android:layout_centerHorizontal="true"
@@ -52,13 +52,14 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button3"
+            android:text="INVITE FRIENDS"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="94dp"
             android:id="@+id/button"/>
     </RelativeLayout>
+
 
     <ImageButton
         android:layout_width="64dp"
@@ -70,7 +71,8 @@
         android:layout_above="@+id/detail_textView"
         android:layout_marginBottom="-32dp"
         android:src="@drawable/tick"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        />
 
     <TextView
         android:layout_width="match_parent"
