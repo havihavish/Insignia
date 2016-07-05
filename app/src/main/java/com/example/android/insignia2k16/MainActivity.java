@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_gallery) {
             // Handle the camera action
-            Intent intent = new Intent(MainActivity.this,Registration.class);
+            Intent intent = new Intent(MainActivity.this,Gallery.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_instafeed) {
