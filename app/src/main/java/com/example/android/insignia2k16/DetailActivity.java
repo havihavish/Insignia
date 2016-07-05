@@ -1,18 +1,17 @@
 package com.example.android.insignia2k16;
 
 import android.animation.Animator;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -23,16 +22,13 @@ import android.widget.TextView;
 public class DetailActivity extends AppCompatActivity {
 
     ImageView mImageView;
-    TextView mTextView;
+    TextView mTextView,mEventName;
     ImageView mFab;
-    Button mRegister_button;
+    Button mRegister_button,agree_btn,disagree_btn;
     RelativeLayout mRelativeLayout;
     boolean flag = true;
     float pixelDensity;
-    int width,height,finalRadius;
-    int cx,cy;
     Animation alphaAppear,alphaDissapear;
-    ImageView closeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +43,21 @@ public class DetailActivity extends AppCompatActivity {
         mTextView = (TextView) findViewById(R.id.detail_textView);
         mRegister_button = (Button)findViewById(R.id.detail_register_button);
         mRelativeLayout = (RelativeLayout)findViewById(R.id.abc);
-        closeButton = (ImageView) findViewById(R.id.close_button);
+        disagree_btn = (Button)findViewById(R.id.button_disAgree);
 
         alphaAppear = AnimationUtils.loadAnimation(this,R.anim.alpha_anim);
         alphaDissapear = AnimationUtils.loadAnimation(this,R.anim.alpha_disappear);
 
         pixelDensity = getResources().getDisplayMetrics().density;
 
+        final int position = getIntent().getIntExtra("p",0);
+
         mRegister_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registration();
+                registration(position);
             }
         });
-        int position = getIntent().getIntExtra("p",0);
 
         mImageView.setImageResource(Constants.mEvents_posters[position]);
         mTextView.setText(Constants.mEvents_names[position]);
@@ -73,72 +70,62 @@ public class DetailActivity extends AppCompatActivity {
                 circularReveal(mRelativeLayout);
             }
         });
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                closeRevealView(mRelativeLayout);
-            }
-        });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void closeRevealView(RelativeLayout layout) {
-        Log.e("XXXX","Enter");
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            Log.e("XXX","Enter ANma");
-            Animator anim = ViewAnimationUtils.createCircularReveal(mRelativeLayout,width/2,height/2,finalRadius,28 * pixelDensity );
-            anim.setDuration(350);
-            anim.addListener(new Animator.AnimatorListener() {
+    public void registration(int position){
+
+        final Dialog dialog = new Dialog(DetailActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.requirementsdialog);
+        agree_btn = (Button)dialog.findViewById(R.id.button_agree);
+        disagree_btn = (Button)dialog.findViewById(R.id.button_disAgree);
+        mEventName = (TextView)dialog.findViewById(R.id.dialog_event_title);
+        mEventName.setText(Constants.mEvents_names[position]);
+        //navigate to registration activity
+        if (agree_btn!=null)
+            agree_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onAnimationStart(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mRelativeLayout.setVisibility(View.GONE);
-                    mFab.setVisibility(View.VISIBLE);
-                    int x=cx = (int) (cx + ((16 * pixelDensity) + (28 * pixelDensity)));
-
-                    mFab.animate()
-                            .translationX(x)
-                            .translationY(cy)
-                            .setDuration(200);
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-
-                }
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
+                public void onClick(View v) {
+                    Intent intent = new Intent(DetailActivity.this,Registration.class);
+                    startActivity(intent);
+                    dialog.dismiss();
                 }
             });
-            anim.start();
-        }
+        disagree_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
     }
 
-    private void circularReveal(RelativeLayout layout) {
+    private void circularReveal(View selectedView) {
+        View myView = selectedView;
 
-        final View myView = layout;
+        // get the center for the clipping circle
+        int cx = myView.getRight() -30;
+        int cy = myView.getBottom() -60;
 
-        width = mImageView.getWidth();
-        height = mImageView.getHeight();
+        // get the final radius for the clipping circle
+        float finalRadius = (float) Math.hypot(cx, cy);
 
-        cx = mImageView.getWidth()/2;
-        cy = mImageView.getHeight()/2;
-
-        finalRadius = (int) Math.hypot(cx,cy);
-
-        cx = (int) (cx - ((16 * pixelDensity) + (28 * pixelDensity)));
-
-        mFab.animate()
-                .translationX(-cx)
-                .translationY(-cy)
-                .setDuration(200)
-                .setListener(new Animator.AnimatorListener() {
+        // create the animator for this view (the start radius is zero)
+        Animator anim =
+                null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            if (flag){
+                anim = ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius).setDuration(500);
+                mRelativeLayout.setVisibility(View.VISIBLE);
+                anim.start();
+                flag = false;
+            }else {
+                anim = ViewAnimationUtils.createCircularReveal(myView, cx, cy, finalRadius, 0).setDuration(500);
+                anim.addListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {
 
@@ -146,36 +133,7 @@ public class DetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
-
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                            Animator anim = ViewAnimationUtils.createCircularReveal(myView,width/2,height/2,28 * pixelDensity,finalRadius);
-                            anim.setDuration(350);
-                            anim.addListener(new Animator.AnimatorListener() {
-                                @Override
-                                public void onAnimationStart(Animator animation) {
-
-                                }
-
-                                @Override
-                                public void onAnimationEnd(Animator animation) {
-                                        myView.setVisibility(View.VISIBLE);
-                              }
-
-                                @Override
-                                public void onAnimationCancel(Animator animation) {
-
-                                }
-
-                                @Override
-                                public void onAnimationRepeat(Animator animation) {
-
-                                }
-                            });
-                            myView.setVisibility(View.VISIBLE);
-                            mFab.setVisibility(View.GONE);
-                            anim.start();
-                        }
-
+                        mRelativeLayout.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -188,73 +146,13 @@ public class DetailActivity extends AppCompatActivity {
 
                     }
                 });
-
-    }
-
-    public void registration(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Requirements")
-                .setMessage("Condition a" + "\n" + "Condition b");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(DetailActivity.this,Registration.class);
-                startActivity(intent);
+                anim.start();
+                flag = true;
             }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        }
+
+
     }
-//
-//    private void circularReveal(View selectedView) {
-//        View myView = selectedView;
-//
-//        // get the center for the clipping circle
-//        int cx = myView.getRight() -30;
-//        int cy = myView.getBottom() -60;
-//
-//        // get the final radius for the clipping circle
-//        float finalRadius = (float) Math.hypot(cx, cy);
-//
-//        // create the animator for this view (the start radius is zero)
-//        Animator anim =
-//                null;
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-//            if (flag){
-//                anim = ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius).setDuration(500);
-//                mRelativeLayout.setVisibility(View.VISIBLE);
-//                anim.start();
-//                flag = false;
-//            }else {
-//                anim = ViewAnimationUtils.createCircularReveal(myView, cx, cy, finalRadius, 0).setDuration(500);
-//                anim.addListener(new Animator.AnimatorListener() {
-//                    @Override
-//                    public void onAnimationStart(Animator animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//                        mRelativeLayout.setVisibility(View.GONE);
-//                    }
-//
-//                    @Override
-//                    public void onAnimationCancel(Animator animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationRepeat(Animator animation) {
-//
-//                    }
-//                });
-//                anim.start();
-//                flag = true;
-//            }
-//        }
-//
-//
-//    }
 
     private Bitmap getReducedBitmap(int albumArtResId) {
         // reduce image size in memory to avoid memory errors

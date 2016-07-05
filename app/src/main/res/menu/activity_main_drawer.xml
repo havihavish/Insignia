@@ -3,8 +3,8 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_registration"
-            android:title="Registration"/>
+            android:id="@+id/nav_gallery"
+            android:title="Gallery"/>
         <item
             android:id="@+id/nav_instafeed"
             android:title="Instafeed"/>
@@ -14,6 +14,9 @@
         <item
             android:id="@+id/nav_about_insignia"
             android:title="About Insignia"/>
+        <item
+            android:id="@+id/nav_chat"
+            android:title="Chat"/>
     </group>
 
     <item android:title="Communicate">

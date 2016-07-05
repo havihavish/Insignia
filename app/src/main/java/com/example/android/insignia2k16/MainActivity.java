@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.android.insignia2k16.chat.ui.ChatActivity;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_registration) {
+        if (id == R.id.nav_gallery) {
             // Handle the camera action
             Intent intent = new Intent(MainActivity.this,Registration.class);
             startActivity(intent);
@@ -124,7 +126,15 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this,About_Insignia.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_share) {
+        }else if(id == R.id.nav_chat){
+
+            //chat activity
+            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+            startActivity(intent);
+
+        }
+
+        else if (id == R.id.nav_share) {
 
 
 
