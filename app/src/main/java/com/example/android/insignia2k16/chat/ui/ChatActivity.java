@@ -1,6 +1,7 @@
 package com.example.android.insignia2k16.chat.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -79,14 +80,27 @@ public class ChatActivity extends AppCompatActivity {
     private void sendMessage() {
 
         String message = messageText.getText().toString();
-        String mUser = "Dummy user";
 
-        messageText.setText("");
+        String mUser = getPrefs();
 
-        Messages chat = new Messages(mUser,message);
+        if (!message.equals("")){
 
-        messageRef.push().setValue(chat);
+            messageText.setText("");
 
+            Messages chat = new Messages(mUser,message);
+
+            messageRef.push().setValue(chat);
+
+        }else {
+            messageText.setError("Empty Message");
+        }
     }
+
+    private String getPrefs() {
+        SharedPreferences prefs = getSharedPreferences(Constants.USERS_DETAILS,MODE_PRIVATE);
+
+        return prefs.getString(Constants.USERNAME,"Chintu");
+    }
+
 
 }

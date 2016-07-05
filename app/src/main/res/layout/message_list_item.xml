@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/chat_layout"
-        android:orientation="vertical"
         android:background="@drawable/bubble_yellow">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/sent_user"/>
+            android:id="@+id/sent_user"
+            android:text="Surya"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"/>
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/users_message"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/users_message"
+            android:text="Users Message"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/sent_user"/>
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/message_timestamp"
+            android:text="7:56am"
+            android:layout_below="@+id/sent_user"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/users_message"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

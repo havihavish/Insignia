@@ -2,6 +2,7 @@ package com.example.android.insignia2k16.chat.ui.login;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -69,6 +70,7 @@ public class SignUp extends AppCompatActivity {
 
         dialog.setContentView(R.layout.authentication_dialog);
         dialog.setCancelable(false);
+        dialog.setTitle("Loading...");
         dialog.show();
 
         mUsername = mUsernameInput.getText().toString();
@@ -76,7 +78,10 @@ public class SignUp extends AppCompatActivity {
 //        String mPassword = new BigInteger(130, mRandom).toString(32);
         mPassword = mPassworInput.getText().toString();
 
+        storeData(mUsername,mEmail);
+
         boolean validEmail = isEmailValid(mEmail);
+        boolean validPassword = isPasswordValid(mPassword);
 
         //create a new user
         mRef.createUser(mEmail, mPassword, new Firebase.ValueResultHandler<Map<String, Object>>() {
@@ -98,6 +103,24 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
+    }
+
+    private boolean isPasswordValid(String password) {
+        if (password.length() < 6){
+            mPassworInput.setError("Password must be 8 characters");
+            return true;
+        }
+        return false;
+    }
+
+    private void storeData(String username, String email) {
+
+        SharedPreferences prefs = getSharedPreferences(Constants.USERS_DETAILS,MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(Constants.USERNAME,username);
+        editor.putString(Constants.EMAIL,email);
+        editor.commit();
     }
 
     private boolean isEmailValid(String email) {

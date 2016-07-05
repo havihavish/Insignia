@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         final Dialog dialog = new Dialog(LoginActivity.this);
 
         dialog.setContentView(R.layout.authentication_dialog);
-
+        dialog.setTitle("Loading...");
         dialog.setCancelable(false);
         dialog.show();
 
