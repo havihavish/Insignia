@@ -72,6 +72,7 @@ public class Instafeed extends AppCompatActivity {
             YoYo.with(Techniques.FlipInX)
                     .duration(700)
                     .playOn(convertView.findViewById(R.id.cardView));
+            Log.d("aaaaaaa",list.get(position));
             Picasso
                     .with(this.context)
                     .load(Uri.parse(list.get(position)))

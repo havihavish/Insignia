@@ -15,12 +15,11 @@
 
     <ImageView
         android:src="@drawable/ic_directions_black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/routebtn"
-        android:layout_marginTop="600dp"
-        android:layout_marginLeft="350dp"
-        android:layout_marginStart="350dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="500dp"
         />
 
 </fragment>

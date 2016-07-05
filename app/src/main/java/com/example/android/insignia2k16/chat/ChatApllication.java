@@ -1,5 +1,8 @@
 package com.example.android.insignia2k16.chat;
 
+import android.content.Context;
+import android.support.multidex.MultiDex;
+
 import com.firebase.client.Firebase;
 
 /**
@@ -11,5 +14,9 @@ public class ChatApllication  extends android.app.Application{
         super.onCreate();
         //set up firebase
         Firebase.setAndroidContext(this);
+    }
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }

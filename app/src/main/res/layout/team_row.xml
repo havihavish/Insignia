@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/team"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_margin="15dp"
+            android:src="@raw/contimg1"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:id="@+id/contImg" />
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Chamarthi Aditya"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:id="@+id/name"
+                />
+            <TextView
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="fest organiser"
+                android:id="@+id/post"/>
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="insignia@nitdelhi.ac.in"
+                android:textColor="#1135e7"
+                android:id="@+id/mail"
+                android:textSize="18sp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

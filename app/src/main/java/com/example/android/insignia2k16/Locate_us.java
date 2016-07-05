@@ -58,7 +58,9 @@ public class Locate_us extends FragmentActivity implements OnMapReadyCallback, G
         mapFragment.getMapAsync(this);
 
 
+        Log.d("xxxxxxxxx","before");
         imageView=(ImageView)findViewById(R.id.routebtn) ;
+        Log.d("xxxxxxxxx","created");
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addOnConnectionFailedListener(this)
                 .addConnectionCallbacks(this)
@@ -68,6 +70,7 @@ public class Locate_us extends FragmentActivity implements OnMapReadyCallback, G
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("xxxxxxxxx","entered");
                 Fetch fetch=new Fetch();
                 fetch.execute();
             }
@@ -76,6 +79,7 @@ public class Locate_us extends FragmentActivity implements OnMapReadyCallback, G
 
     @Override
     protected void onStart() {
+        Log.d("xxxxxxx","onStart");
         super.onStart();
         googleApiClient.connect();
     }
@@ -91,19 +95,27 @@ public class Locate_us extends FragmentActivity implements OnMapReadyCallback, G
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.d("xxxxxxx","onMapReady");
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(28.8428, 77.1050);
+        des=sydney;
         mMap.addMarker(new MarkerOptions().position(sydney).title("National Institute of Technology,Delhi"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     @Override
     public void onConnected(Bundle bundle) {
+        Location location=LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        if(location!=null)
+            f=new LatLng(location.getLatitude(),location.getLongitude());
+        Log.d("xxxxxxx","onConnected");
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(600000);
+        locationRequest.setInterval(1000);
+
+
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -111,9 +123,21 @@ public class Locate_us extends FragmentActivity implements OnMapReadyCallback, G
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    0);
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    0);
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, Locate_us.this);
+
+
         }
         LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, Locate_us.this);
+        Log.d("xxxxxxxxx","out");
+
+
     }
 
     @Override
@@ -123,7 +147,9 @@ public class Locate_us extends FragmentActivity implements OnMapReadyCallback, G
 
     @Override
     public void onLocationChanged(Location location) {
+        Log.d("xxxxxxx","onLocationChanged");
         f = new LatLng(location.getLatitude(), location.getLongitude());
+        Log.d("xxxxx",f.latitude+" "+f.longitude);
     }
 
     @Override
@@ -201,63 +227,67 @@ public class Locate_us extends FragmentActivity implements OnMapReadyCallback, G
             String duration = "";
 
 
-
-            if(result.size()<1){
-                Toast.makeText(getBaseContext(), "No Points", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-
-            // Traversing through all the routes
-            for(int i=0;i<result.size();i++){
-                points = new ArrayList<LatLng>();
-                lineOptions = new PolylineOptions();
-
-                // Fetching i-th route
-                List<HashMap<String, String>> path = result.get(i);
-
-                // Fetching all the points in i-th route
-                for(int j=0;j<path.size();j++){
-                    HashMap<String,String> point = path.get(j);
-
-                    if(j==0){   // Get distance from the list
-                        distance = (String)point.get("distance");
-                        continue;
-                    }else if(j==1){ // Get duration from the list
-                        duration = (String)point.get("duration");
-                        continue;
-                    }
-
-                    double lat = Double.parseDouble(point.get("lat"));
-                    double lng = Double.parseDouble(point.get("lng"));
-                    LatLng position = new LatLng(lat, lng);
-
-                    points.add(position);
+            if(result!=null){
+                if(result.size()<1){
+                    Toast.makeText(getBaseContext(), "No Points", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
-                // Adding all the points in the route to LineOptions
-                lineOptions.addAll(points);
-                lineOptions.width(5);
-                lineOptions.color(Color.RED);
 
-            }
+                // Traversing through all the routes
+                for(int i=0;i<result.size();i++){
+                    points = new ArrayList<LatLng>();
+                    lineOptions = new PolylineOptions();
 
-            Log.e("Distance: " + distance, "Duration: " + duration);
-            //tvDistanceDuration.setText("Distance: "+distance + ", Duration: "+duration);
-            // Drawing polyline in the Google Map for the i-th route
-            mMap.addPolyline(lineOptions);
+                    // Fetching i-th route
+                    List<HashMap<String, String>> path = result.get(i);
+
+                    // Fetching all the points in i-th route
+                    for(int j=0;j<path.size();j++){
+                        HashMap<String,String> point = path.get(j);
+
+                        if(j==0){   // Get distance from the list
+                            distance = (String)point.get("distance");
+                            continue;
+                        }else if(j==1){ // Get duration from the list
+                            duration = (String)point.get("duration");
+                            continue;
+                        }
+
+                        double lat = Double.parseDouble(point.get("lat"));
+                        double lng = Double.parseDouble(point.get("lng"));
+                        LatLng position = new LatLng(lat, lng);
+
+                        points.add(position);
+                    }
+
+                    // Adding all the points in the route to LineOptions
+                    lineOptions.addAll(points);
+                    lineOptions.width(5);
+                    lineOptions.color(Color.RED);
+
+                }
+
+                Log.e("Distance: " + distance, "Duration: " + duration);
+                //tvDistanceDuration.setText("Distance: "+distance + ", Duration: "+duration);
+                // Drawing polyline in the Google Map for the i-th route
+                mMap.addPolyline(lineOptions);
 //            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(17.3850, 78.4867)));
 //            CameraUpdate zoom = CameraUpdateFactory.zoomTo(11);
 //            mMap.animateCamera(zoom);
 
-            CameraPosition cp=CameraPosition.builder()
-                    .target(f)
-                    .zoom(11)
-                    .bearing(0)
-                    .tilt(65)
-                    .build();
-            mMap.addMarker(new MarkerOptions().position(f).title("Your Location"));
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp),10000,null);
+                CameraPosition cp=CameraPosition.builder()
+                        .target(f)
+                        .zoom(11)
+                        .bearing(0)
+                        .tilt(65)
+                        .build();
+                mMap.addMarker(new MarkerOptions().position(f).title("Your Location"));
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp),10000,null);
+            }else{
+                Toast.makeText(Locate_us.this,"Check your Internet or GPS connection",Toast.LENGTH_LONG).show();;
+            }
+
         }
     }
 
@@ -336,11 +366,15 @@ public class Locate_us extends FragmentActivity implements OnMapReadyCallback, G
             mMap.animateCamera(zoom);
             if(des!=null&&f!=null){
                 String url = getDirectionsUrl(f, des);
+                Log.d("xxxxxx",url);
                 DownloadTask downloadTask = new DownloadTask();
 // Start downloading json data from Google Directions API
                 downloadTask.execute(url);
             }else{
-                Toast.makeText(Locate_us.this,"Check your Internet Connection Or turn on GPS",Toast.LENGTH_LONG).show();
+                if(des==null)
+                    Toast.makeText(Locate_us.this," des not set properly",Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(Locate_us.this,"Check your  Internet Connection Or turn on GPS",Toast.LENGTH_LONG).show();
             }
 
         }
@@ -349,7 +383,7 @@ public class Locate_us extends FragmentActivity implements OnMapReadyCallback, G
         protected String doInBackground(String... params) {
 
             des=new LatLng(28.8428,77.1050);
-
+            f=new LatLng(17.9689,79.5941);
             return null;
 
 
