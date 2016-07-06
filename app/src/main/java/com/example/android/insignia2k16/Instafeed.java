@@ -44,6 +44,8 @@ public class Instafeed extends AppCompatActivity {
         list=new ArrayList<String>();
         MyFetchTask myFetchTask=new MyFetchTask();
         myFetchTask.execute();
+        setTitle("Instafeed");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     class CustomAdapter extends ArrayAdapter {
 
