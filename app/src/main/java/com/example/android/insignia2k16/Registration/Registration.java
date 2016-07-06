@@ -1,4 +1,4 @@
-package com.example.android.insignia2k16;
+package com.example.android.insignia2k16.Registration;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,32 +17,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 
-
-import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-
+import com.example.android.insignia2k16.R;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 import static java.lang.Thread.sleep;
 

@@ -1,4 +1,4 @@
-package com.example.android.insignia2k16;
+package com.example.android.insignia2k16.EventsMain;
 
 import android.animation.Animator;
 import android.app.Dialog;
@@ -18,6 +18,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.android.insignia2k16.Constants;
+import com.example.android.insignia2k16.R;
+import com.example.android.insignia2k16.Registration.Registration;
 
 public class DetailActivity extends AppCompatActivity {
 

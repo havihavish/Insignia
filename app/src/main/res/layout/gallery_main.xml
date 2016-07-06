@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#040404"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.android.insignia2k16.MainActivity"
+    tools:context=".EventsMain.MainActivity"
     tools:showIn="@layout/activity_gallery">
 
     <GridView

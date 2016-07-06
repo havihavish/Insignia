@@ -1,4 +1,4 @@
-package com.example.android.insignia2k16;
+package com.example.android.insignia2k16.EventsMain;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.android.insignia2k16.AboutInsignia.About_Insignia;
+import com.example.android.insignia2k16.Constants;
+import com.example.android.insignia2k16.Instafeed.Instafeed;
+import com.example.android.insignia2k16.Maps.Locate_us;
+import com.example.android.insignia2k16.R;
 import com.example.android.insignia2k16.chat.ui.ChatActivity;
+import com.example.android.insignia2k16.gallery.Gallery;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

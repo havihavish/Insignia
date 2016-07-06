@@ -1,4 +1,4 @@
-package com.example.android.insignia2k16;
+package com.example.android.insignia2k16.Maps;
 
 import com.google.android.gms.maps.model.LatLng;
 

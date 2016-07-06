@@ -1,4 +1,4 @@
-package com.example.android.insignia2k16;
+package com.example.android.insignia2k16.AboutInsignia;
 
 import android.content.Context;
 import android.net.Uri;
@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.example.android.insignia2k16.R;
 
 import java.util.ArrayList;
 import java.util.List;

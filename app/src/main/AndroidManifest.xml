@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".EventsMain.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -27,9 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registration"></activity>
-        <activity android:name=".FullImageActivity"></activity>
-        <activity android:name=".Instafeed"></activity>
+        <activity android:name=".Registration.Registration"></activity>
+        <activity android:name=".gallery.FullImageActivity"></activity>
+        <activity android:name=".Instafeed.Instafeed"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -43,65 +43,65 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Locate_us"
+            android:name=".Maps.Locate_us"
             android:label="@string/title_activity_locate_us">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.insignia2k16.MainActivity" />
+                android:value=".EventsMain.MainActivity" />
         </activity>
         <activity
-            android:name=".About_Insignia"
+            android:name=".AboutInsignia.About_Insignia"
             android:label="@string/title_activity_about__insignia"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".EventsMain.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.insignia2k16.MainActivity" />
+                android:value=".EventsMain.MainActivity" />
         </activity>
         <activity
-            android:name=".DetailActivity"
+            android:name=".EventsMain.DetailActivity"
             android:label="@string/title_activity_detail"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".EventsMain.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.insignia2k16.MainActivity" />
+                android:value=".EventsMain.MainActivity" />
         </activity>
         <activity
             android:name=".chat.ui.ChatActivity"
             android:label="@string/title_activity_chat"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".EventsMain.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.insignia2k16.MainActivity" />
+                android:value=".EventsMain.MainActivity" />
         </activity>
         <activity
             android:name=".chat.ui.login.LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".EventsMain.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.insignia2k16.MainActivity" />
+                android:value=".EventsMain.MainActivity" />
         </activity>
         <activity
             android:name=".chat.ui.login.SignUp"
             android:label="@string/title_activity_sign_up"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".EventsMain.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.insignia2k16.MainActivity" />
+                android:value=".EventsMain.MainActivity" />
         </activity>
         <activity
-            android:name=".Gallery"
+            android:name=".gallery.Gallery"
             android:label="@string/title_activity_gallery"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".EventsMain.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.insignia2k16.MainActivity" />
+                android:value=".EventsMain.MainActivity" />
         </activity>
     </application>
 

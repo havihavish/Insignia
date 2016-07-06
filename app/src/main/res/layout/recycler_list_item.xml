@@ -26,7 +26,6 @@
             android:text="Event Details"
             android:textSize="18sp"
             android:padding="16dp"
-            android:background="#123456"
             android:id="@+id/list_item_textView"
             android:textColor="#ffc579"/>
 

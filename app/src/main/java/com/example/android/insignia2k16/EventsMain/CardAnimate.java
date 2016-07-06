@@ -1,7 +1,9 @@
-package com.example.android.insignia2k16;
+package com.example.android.insignia2k16.EventsMain;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+
+import com.example.android.insignia2k16.EventsMain.MyAdapter;
 
 /**
  * Created by surya on 25-06-2016.

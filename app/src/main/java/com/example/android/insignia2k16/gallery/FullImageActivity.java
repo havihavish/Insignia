@@ -1,4 +1,4 @@
-package com.example.android.insignia2k16;
+package com.example.android.insignia2k16.gallery;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.android.insignia2k16.R;
 
 public class FullImageActivity extends AppCompatActivity {
     private int images[]={R.drawable.im,R.drawable.a2,R.drawable.im,R.drawable.im,R.drawable.im,R.drawable.im,R.drawable.im,R.drawable.im,R.drawable.im,R.drawable.im,R.drawable.im,R.drawable.im,R.drawable.im,R.drawable.im,R.drawable.im,R.drawable.im};

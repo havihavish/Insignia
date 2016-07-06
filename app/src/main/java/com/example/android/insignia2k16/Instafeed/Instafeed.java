@@ -1,4 +1,4 @@
-package com.example.android.insignia2k16;
+package com.example.android.insignia2k16.Instafeed;
 
 
 import android.content.Context;
@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.example.android.insignia2k16.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
