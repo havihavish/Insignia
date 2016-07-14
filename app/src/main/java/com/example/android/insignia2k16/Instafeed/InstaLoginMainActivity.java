@@ -43,7 +43,7 @@ import java.util.List;
 
 /**
  * Created by vengalrao on 10-07-2016.
- *..
+ *.
  */
 public class InstaLoginMainActivity extends AppCompatActivity {
     private InstagramApp mApp;
