@@ -7,6 +7,9 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -27,9 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registration.Registration"></activity>
-        <activity android:name=".gallery.FullImageActivity"></activity>
-        <activity android:name=".Instafeed.Instafeed"></activity>
+        <activity android:name=".Registration.Registration" />
+        <activity android:name=".gallery.FullImageActivity" />
+        <activity android:name=".Instafeed.Instafeed" />
+        <activity android:name=".Instafeed.InstaLoginMainActivity"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -103,6 +107,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".EventsMain.MainActivity" />
         </activity>
+        <activity android:name=".Instafeed.MainFeed"></activity>
     </application>
 
 </manifest>
