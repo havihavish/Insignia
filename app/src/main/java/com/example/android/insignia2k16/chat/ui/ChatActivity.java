@@ -1,10 +1,11 @@
 package com.example.android.insignia2k16.chat.ui;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ public class ChatActivity extends AppCompatActivity {
     EditText messageText;
     Button mSend;
     Firebase messageRef;
+    public static String mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,9 @@ public class ChatActivity extends AppCompatActivity {
         mRef = new Firebase(Constants.FIREBASE_BASE_URL);
         mListView = (ListView)findViewById(R.id.chat_listView);
         messageText = (EditText)findViewById(R.id.message_text);
+
+        mUser = getUser();
+
         mSend = (Button)findViewById(R.id.send_button);
 
         mSend.setOnClickListener(new View.OnClickListener() {
@@ -73,15 +78,45 @@ public class ChatActivity extends AppCompatActivity {
         mListView.setDivider(null);
         mListView.setDividerHeight(0);
         mListView.setAdapter(mFirebaseAdapter);
+        mListView.post(new Runnable() {
+            @Override
+            public void run() {
+                mListView.setSelection(mListView.getCount()-1);
+            }
+        });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_chat, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_logout) {
+            mRef.unauth();
+            Intent intent = new Intent(ChatActivity.this,LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void sendMessage() {
 
         String message = messageText.getText().toString();
-
-        String mUser = getPrefs();
 
         if (!message.equals("")){
 
@@ -90,17 +125,20 @@ public class ChatActivity extends AppCompatActivity {
             Messages chat = new Messages(mUser,message);
 
             messageRef.push().setValue(chat);
-
         }else {
             messageText.setError("Empty Message");
         }
     }
 
-    private String getPrefs() {
-        SharedPreferences prefs = getSharedPreferences(Constants.USERS_DETAILS,MODE_PRIVATE);
+    private String getUser() {
 
-        return prefs.getString(Constants.USERNAME,"Chintu");
+        String mUser = (String) mRef.getAuth().getProviderData().get("email");
+
+        for (int i=0;i<mUser.length();i++){
+            if (mUser.charAt(i) == '@')
+                return mUser.substring(0,i);
+        }
+        return null;
     }
-
 
 }

@@ -1,12 +1,14 @@
 package com.example.android.insignia2k16.chat.ui.Adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.android.insignia2k16.R;
 import com.example.android.insignia2k16.chat.model.Messages;
+import com.example.android.insignia2k16.chat.ui.ChatActivity;
 import com.firebase.client.Query;
 import com.firebase.ui.FirebaseListAdapter;
 
@@ -40,12 +42,22 @@ public class MyFirebaseAdapter  extends FirebaseListAdapter<Messages>{
          *
          */
         RelativeLayout layout = (RelativeLayout)view.findViewById(R.id.chat_layout);
+
         TextView username = (TextView)view.findViewById(R.id.sent_user);
+
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout.getLayoutParams();
+
+        if (list.getUser().equals(ChatActivity.mUser)){
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            layout.setBackgroundResource(R.drawable.bubble_green);
+            layout.setLayoutParams(params);
+            Log.e("xxx","equal");
+        }
+
         TextView usermessage = (TextView)view.findViewById(R.id.users_message);
         TextView messagestamp = (TextView)view.findViewById(R.id.message_timestamp);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm a");
-        //TODO change 9 patch image image to green if current user
         usermessage.setText(list.getMessage());
         username.setText(list.getUser());
         messagestamp.setText(dateFormat.format(new Date(list.getTimestampSentLong())));
