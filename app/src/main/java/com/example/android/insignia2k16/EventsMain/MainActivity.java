@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.android.insignia2k16.AboutInsignia.About_Insignia;
 import com.example.android.insignia2k16.Constants;
 import com.example.android.insignia2k16.Instafeed.Instafeed;
+import com.example.android.insignia2k16.Instafeed.MainFeed;
 import com.example.android.insignia2k16.Maps.Locate_us;
 import com.example.android.insignia2k16.R;
 import com.example.android.insignia2k16.chat.GlobalChat;
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_instafeed) {
 
             Intent intent = new Intent
-                    (MainActivity.this,Instafeed.class);
+                    (MainActivity.this,MainFeed.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_Locate_us) {
