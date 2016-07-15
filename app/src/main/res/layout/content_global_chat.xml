@@ -10,16 +10,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.android.insignia2k16.chat.ui.ChatActivity"
-    tools:showIn="@layout/activity_chat">
+    tools:context=".chat.GlobalChat"
+    tools:showIn="@layout/activity_global_chat">
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/chat_listView"
-            android:layout_above="@+id/bottom_layout">
-        </ListView>
-    
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/chat_recyclerView"
+        android:layout_above="@+id/bottom_layout"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

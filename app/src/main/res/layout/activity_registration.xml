@@ -28,7 +28,6 @@
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-
                     android:hint="NAME"
                     android:visibility="gone"
                     android:gravity="center_vertical"

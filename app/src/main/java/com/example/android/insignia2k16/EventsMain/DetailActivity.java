@@ -47,8 +47,6 @@ public class DetailActivity extends AppCompatActivity {
         mTextView = (TextView) findViewById(R.id.detail_textView);
         mRegister_button = (Button)findViewById(R.id.detail_register_button);
         mRelativeLayout = (RelativeLayout)findViewById(R.id.abc);
-        disagree_btn = (Button)findViewById(R.id.button_disAgree);
-
         alphaAppear = AnimationUtils.loadAnimation(this,R.anim.alpha_anim);
         alphaDissapear = AnimationUtils.loadAnimation(this,R.anim.alpha_disappear);
 
@@ -121,6 +119,9 @@ public class DetailActivity extends AppCompatActivity {
         // create the animator for this view (the start radius is zero)
         Animator anim =
                 null;
+        mFab.setScaleX(0);
+        mFab.setScaleY(0);
+        mFab.animate().scaleX(1).scaleY(1).setDuration(200).start();
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             if (flag){
                 anim = ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius).setDuration(500);

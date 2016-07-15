@@ -16,4 +16,6 @@
     <string name="error_invalid_email_not_valid">Invalid email</string>
     <string name="title_activity_gallery">Gallery</string>
     <string name="action_logout">Logout</string>
+    <string name="title_activity_global_chat">GlobalChat</string>
+    <!--<string name="default_web_client_id">264584633001-ut5bu8dcseucedhavnobdoevj482h018.apps.googleusercontent.com</string>-->
 </resources>

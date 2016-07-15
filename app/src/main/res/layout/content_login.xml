@@ -10,52 +10,68 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.android.insignia2k16.chat.ui.login.LoginActivity"
+    tools:context=".chat.Auth.Login"
     tools:showIn="@layout/activity_login"
     android:orientation="vertical">
 
-    <EditText
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/login_email"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:hint="Email"/>
+        android:layout_height="wrap_content">
 
-    <EditText
+        <EditText
+            android:id="@+id/login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/login_password"
-        android:hint="Password"/>
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"/>
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:id="@+id/sign_in_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/login_button"/>
+        android:text="Sign In"/>
+
+    <Button
+        android:id="@+id/google_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign In with Google"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New User?"
-            android:textSize="18sp"/>
+            android:text="New User ?"
+            android:textSize="24sp"/>
+
         <TextView
+            android:id="@+id/sign_up_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/sign_up_text"
             android:text="Sign Up"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
     </LinearLayout>
 
 </LinearLayout>

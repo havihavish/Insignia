@@ -22,7 +22,7 @@ import com.example.android.insignia2k16.Constants;
 import com.example.android.insignia2k16.Instafeed.Instafeed;
 import com.example.android.insignia2k16.Maps.Locate_us;
 import com.example.android.insignia2k16.R;
-import com.example.android.insignia2k16.chat.ui.ChatActivity;
+import com.example.android.insignia2k16.chat.GlobalChat;
 import com.example.android.insignia2k16.gallery.Gallery;
 
 public class MainActivity extends AppCompatActivity
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
         }else if(id == R.id.nav_chat){
 
             //chat activity
-            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+            Intent intent = new Intent(MainActivity.this, GlobalChat.class);
             startActivity(intent);
 
         }

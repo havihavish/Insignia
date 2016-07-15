@@ -2,7 +2,7 @@ package com.example.android.insignia2k16.Registration;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
@@ -12,11 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
-
 import com.example.android.insignia2k16.R;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
@@ -24,9 +19,11 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
-import static java.lang.Thread.sleep;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
-public class Registration extends ActionBarActivity {
+public class Registration extends AppCompatActivity {
 
 
     public static final MediaType FORM_DATA_TYPE

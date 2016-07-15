@@ -1,9 +1,6 @@
 package com.example.android.insignia2k16.EventsMain;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,18 +40,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.mTextView.setText(Constants.mEvents_names[position]);
         holder.mImageView.setImageResource(Constants.mEvents_posters[position]);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(),Constants.mEvents_posters[position]);
-        final int defaultColor = 0x000000;
-        Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
-            @Override
-            public void onGenerated(Palette palette) {
-                    Palette.Swatch swatch = palette.getVibrantSwatch();
-                    if (swatch!=null){
-                        holder.mTextView.setBackgroundColor(swatch.getRgb());
-                    }
-
-            }
-        });
+//        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(),Constants.mEvents_posters[position]);
+//        Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
+//            @Override
+//            public void onGenerated(Palette palette) {
+//                    Palette.Swatch swatch = palette.getVibrantSwatch();
+//                    if (swatch!=null){
+//                        holder.mTextView.setBackgroundColor(swatch.getRgb());
+//                    }
+//
+//            }
+//        });
 
         if (position > prevPosition){
             //scroll down
